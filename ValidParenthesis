@@ -1,0 +1,22 @@
+public class Solution {
+    public bool IsValid(string s) {
+        Dictionary<char, char> pair = new Dictionary<char,char>();
+        pair.Add('(', ')');
+        pair.Add('[', ']');
+        pair.Add('{', '}');
+        if (s.Length % 2 != 0)  return false;
+        Stack<char> paraStack = new Stack<char>();
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (paraStack.Count == 0)   paraStack.Push(s[i]);
+            else if (!pair.ContainsKey(paraStack.Peek()))   return false;
+            else {
+                if (pair[paraStack.Peek()] == s[i]) paraStack.Pop();
+                else    paraStack.Push(s[i]);
+            }
+                
+        }
+        if (paraStack.Count == 0)   return true;
+        else    return false;
+    }
+}
