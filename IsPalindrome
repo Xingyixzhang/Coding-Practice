@@ -1,0 +1,9 @@
+public class Solution {
+    public bool IsPalindrome(int x) {
+        string numstr = x.ToString();
+        for (int i = 0; i < numstr.Length; i++){
+            if (numstr[i] != numstr[numstr.Length-i-1])    return false;
+        }
+        return true;
+    }
+}
