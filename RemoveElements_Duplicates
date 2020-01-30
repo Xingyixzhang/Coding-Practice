@@ -1,0 +1,34 @@
+// Remove Elements ---------------------------------------------------------------------------
+public class Solution {
+    public int RemoveElement(int[] nums, int val) {
+        int x = 0;
+        if (nums.Length == 0) return 0;
+        else{
+            for (int j = 0; j < nums.Length; j++)
+            {
+                if (nums[j] != val){
+                    nums[x] = nums[j];
+                    x += 1;
+                }
+            }
+        }
+        return x;
+    }
+}
+// Remove Duplicates----------------------------------------------------------------------------
+
+public class Solution {
+    public int RemoveDuplicates(int[] nums) {
+        if (nums.Length <= 1)   return nums.Length;
+        else{
+            int j = 0;
+            for (int i = 1; i < nums.Length; i++){
+                if (nums[i] != nums[j]){
+                    j++;
+                    nums[j] = nums[i];
+                }
+            }
+            return j+1;
+        }
+    }
+}
