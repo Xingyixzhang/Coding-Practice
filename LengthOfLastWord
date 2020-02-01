@@ -1,0 +1,25 @@
+C# Solution --------------------------------------------------------------------------
+
+public class Solution {
+    public int LengthOfLastWord(string s) {
+        int lenindex = s.Length-1;
+        
+        for (int i = lenindex; i >= 0; i--){
+            if (s[lenindex] == ' ') {lenindex -= 1; continue;}
+            if (s[i] == ' ')    return (lenindex-i);
+        }
+        
+        return (lenindex+1);
+    }
+}
+
+Python3 Solution ------------------------------------------------------------------
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        word = s.split()
+        
+        try:
+            return len(word[-1])
+        except:
+            return 0
