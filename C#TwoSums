@@ -1,3 +1,5 @@
+// Look for the two indices in an unsorted array. --------------------------------------------------------------------------
+
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
         int length = nums.Length;
@@ -14,3 +16,25 @@ public class Solution {
         return new int [] {0,0};
     }
 }
+
+// change the indices output to human-read indices (index+1) && in a sorted array -- BAD EXAMPLE, EXCEED RUNTIME------------
+
+public class Solution {
+    public int[] TwoSum(int[] numbers, int target) {
+        int[] index = new int[2];
+        
+        for (int i = 0; i < numbers.Length; i++){
+            for (int j = i+1; j < numbers.Length; j++)
+            {
+                if (numbers[i] + numbers[j] == target){
+                        index[0] = Math.Min(i, j)+1;
+                        index[1] = Math.Max(i, j)+1;
+                        return index;
+                }
+            }
+        }
+        return null;
+    }
+}
+
+// 
