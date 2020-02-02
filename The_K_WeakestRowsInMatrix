@@ -1,0 +1,31 @@
+/*
+m == mat.length
+n == mat[i].length
+2 <= n, m <= 100
+1 <= k <= m
+matrix[i][j] is either 0 or 1.
+*/
+
+C# Solution -------------------------------------------------------------------------
+
+public class Solution {
+    public int[] KWeakestRows(int[][] mat, int k) {
+        int[] result = new int[k];
+        int[] nums = new int[mat.Length];
+        
+        for (int i = 0; i < mat.Length; i++){
+            nums[i] = 0;
+            for (int j = 0; j < mat[i].Length; j++) nums[i] += mat[i][j];
+        }
+        
+        int index;
+        for (int x = 0; x < k; x++){
+            index = Array.IndexOf(nums, nums.Min());
+            result[x] = index;
+            nums[index] = 101;
+        }
+        
+        return  result;
+    }
+}
+
