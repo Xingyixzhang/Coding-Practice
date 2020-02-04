@@ -42,3 +42,25 @@ class Solution:
             i = temp
             n=n-1
         return i 
+
+Change in Question: Min Cost Climbing Stairs. ------------- CLASSIC ------------------------
+
+C# Solution --------------------------------------------------------------------------------
+
+public class Solution {
+    public int MinCostClimbingStairs(int[] cost) {
+        int cost1 = cost[0];
+        int cost2 = cost[1];
+        int result = 0;
+        
+        for (int i = 2; i < cost.Length; i++){
+            result = Math.Min(cost1, cost2) + cost[i];
+            cost1 = cost2;
+            cost2 = result;
+        }
+        
+        result = Math.Min(cost1, cost2);
+        
+        return result;
+    }
+}
