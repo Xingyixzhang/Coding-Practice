@@ -4,7 +4,7 @@ public class Solution {
     public int ClimbStairs(int n) {
         int[] result = new int[n];
         int final = 0;
-        
+/*                                     -------- OR: if (n <= 2) return n;
         switch (n){
             case 0:
                 return 0;
@@ -15,7 +15,7 @@ public class Solution {
             default:
                 break;
         }
-        
+*/                                    ---------
         result[0] = ClimbStairs(1);
         result[1] = ClimbStairs(2);
         
@@ -29,3 +29,16 @@ public class Solution {
         return final;
     }
 }
+
+Python3 Solution -----------------------------------------------------------------------
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        i=1
+        j=1
+        while n >= 1 :
+            temp=j
+            j += i
+            i = temp
+            n=n-1
+        return i 
