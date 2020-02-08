@@ -12,8 +12,9 @@ public class Solution {
         ListNode l1_next = l1.next;
         ListNode l2_next = l2.next;
         int carry_over = (l1.val + l2.val) / 10;
-        ListNode result = new ListNode((l1.val + l2.val) % 10);
-        ListNode curr = result;
+        ListNode result = new ListNode((l1.val + l2.val) % 10); // result remember where it starts in the memory allocation.
+        // curr to make pointer and nodes following the head. result stay and only remember the head.
+        ListNode curr = result;     // curr remembers the current location and as it moves along the listnode, it changes value.
         
         while (l1_next != null && l2_next != null){
             int total = l1_next.val + l2_next.val + carry_over;
@@ -46,6 +47,6 @@ public class Solution {
         if (carry_over != 0)
             curr.next = new ListNode(carry_over);
         
-        return result;
+        return result;      // if return curr, for the testcase of output 7 0 8, curr will return 8.
     }
 }
