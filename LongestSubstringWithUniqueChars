@@ -42,5 +42,18 @@ public class Solution {
     }
 }
 
-C# 3 -- Sliding Window Optimized -----------------------------------------  O(n)
+C# 3 -- Sliding Window Optimized -- (ASCII) ------------------------------  O(n)
 
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        int result = 0;
+        int[] index = new int[128]; // current index of character
+        // try to extend the range [i, j]
+        for (int j = 0, i = 0; j < s.Length; j++) {
+            i = Math.Max(index[s[j]], i);
+            result = Math.Max(result, j - i + 1);
+            index[s[j]] = j + 1;
+        }
+        return result;
+    }
+}
