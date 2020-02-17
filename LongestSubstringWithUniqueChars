@@ -1,4 +1,4 @@
-C# 1 -- Brute Force --------------------------------------------------------
+C# 1 -- Brute Force --------------------------------------------------------  O(n3)
 
 public class Solution {
     public int LengthOfLongestSubstring(string s) {
@@ -19,7 +19,7 @@ public class Solution {
     }
 }
 
-C# 2 -- Sliding Window -----------------------------------------------------
+C# 2 -- Sliding Window -----------------------------------------------------  O(n)/O(2n)
 
 public class Solution {
     public int LengthOfLongestSubstring(string s) {
@@ -41,3 +41,6 @@ public class Solution {
         return max;
     }
 }
+
+C# 3 -- Sliding Window Optimized -----------------------------------------  O(n)
+
