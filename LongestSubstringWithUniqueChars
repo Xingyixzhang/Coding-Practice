@@ -1,0 +1,43 @@
+C# 1 -- Brute Force --------------------------------------------------------
+
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        int result = 0;
+        for (int i = 0; i < s.Length; i++)
+            for (int j = i + 1; j <= s.Length; j++)
+                if (allUnique(s, i, j)) result = Math.Max(result, j - i);
+        return result;
+    }
+
+    public bool allUnique(String s, int start, int end) {
+        HashSet<char> range = new HashSet<char>();
+        for (int i = start; i < end; i++) {
+            if (range.Contains(s[i])) return false;
+            range.Add(s[i]);
+        }
+        return true;
+    }
+}
+
+C# 2 -- Sliding Window -----------------------------------------------------
+
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        int left_pointer  = 0;
+        int right_pointer = 0;
+        int max = 0;
+        HashSet<char> hash = new HashSet<char>();
+        
+        while(right_pointer < s.Length){
+            if(!hash.Contains(s[right_pointer])){
+                hash.Add(s[right_pointer]);
+                right_pointer++;
+                max = Math.Max(hash.Count, max);
+            }else{
+                hash.Remove(s[left_pointer]);
+                left_pointer++;
+            }
+        }
+        return max;
+    }
+}
