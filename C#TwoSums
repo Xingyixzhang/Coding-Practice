@@ -17,46 +17,38 @@ public class Solution {
     }
 }
 
-// change the indices output to human-read indices (index+1) && in a sorted array -- BAD EXAMPLE, EXCEED RUNTIME------------
-
-public class Solution {
-    public int[] TwoSum(int[] numbers, int target) {
-        int[] index = new int[2];
-        
-        for (int i = 0; i < numbers.Length; i++){
-            for (int j = i+1; j < numbers.Length; j++)
-            {
-                if (numbers[i] + numbers[j] == target){
-                        index[0] = Math.Min(i, j)+1;
-                        index[1] = Math.Max(i, j)+1;
-                        return index;
-                }
-            }
-        }
-        return null;
-    }
-}
-
-// Starting from both sides and tighten the potential limits. Good runtime with accurate outcome. --------------------------------
+// Two Pointers (Only if the given array is sorted) -- O(n) --------------------------------
 
 public class Solution {
     public int[] TwoSum(int[] numbers, int target) {
     
-        if (numbers.Length == 0)    return new int[0];
+        if (numbers.Length <= 1)    return new int[0];
         
         int i = 0;
         int j = numbers.Length-1;
         
-        while (i < numbers.Length && j >=0 && (numbers[i] + numbers[j]) != target) 
+        while (i < j) 
         {
             if (numbers[i] + numbers[j] > target)   j--;
-            else if (numbers[i] + numbers[j] < target)  i++;
-            else{
-                if (i == j) return new int[0];
-                else    return new int[2]{i+1, j+1};
-            }
+            if (numbers[i] + numbers[j] < target)  i++;
+            if (numbers[i] + numbers[j] == target)    return new int[]{i, j};
         }
         
-        return new int[]{i+1, j+1};
+        return new int[0];
+    }
+}
+
+// Final solution -- fast for both sorted and unsorted ---------------------------------------------------
+
+public class Solution {
+    public int[] TwoSum(int[] numbers, int target) {
+        Dictionary<int, int> visited = new Dictionary<int, int>();
+        int compli;
+        for (int i = 0; i < numbers.Length; i ++){
+            compli = target - numbers[i];
+            if (visited.ContainsKey(compli))   return new int[]{visited[compli], i};
+            visited.TryAdd(numbers[i], i);
+        }
+        return new int[0];
     }
 }
