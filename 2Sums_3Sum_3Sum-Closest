@@ -53,7 +53,7 @@ public class Solution {
     }
 }
 
-// *** 3Sum -- 
+// *** 3Sum -- Two Pointers
 /*
  * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
  * Note:
@@ -86,6 +86,44 @@ public class Solution {
                 }
             }
         }
+        return result;
+    }
+}
+
+// *** 3Sum-Closet -- Two Pointers 
+/*
+ * Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. 
+ * Return the sum of the three integers. You may assume that each input would have exactly one solution.
+ * Example:
+ * Given array nums = [-1, 2, 1, -4], and target = 1.
+ * The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+ */
+ 
+public class Solution {
+    public int ThreeSumClosest(int[] nums, int target) {
+        
+        if (nums.Length < 3)    return 0;
+        Array.Sort(nums);
+        int result = nums[0] + nums[1] + nums[2];
+        
+        for (int i = 0; i < nums.Length - 2; i++){
+            
+            int left = i + 1;
+            int right = nums.Length-1;
+            
+            while (left < right){
+                
+                int sum = nums[i] + nums[left] + nums[right];
+                
+                if (sum < target)           left++;
+                else if (sum > target)      right --;
+                else                        return sum;
+                
+                if (Math.Abs(result - target) 
+                    > Math.Abs(sum - target))   result = sum;
+            }
+        }
+        
         return result;
     }
 }
