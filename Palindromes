@@ -1,0 +1,30 @@
+// *** Check if an integer (convert to string in class) is Palindrome -----------------------------
+
+public class Solution {
+    public bool IsPalindrome(int x) {
+        string numstr = x.ToString();
+        for (int i = 0; i < numstr.Length; i++){
+            if (numstr[i] != numstr[numstr.Length-i-1])    return false;
+        }
+        return true;
+    }
+}
+
+// *** Check if a string(containing any chars) is Palindrome (Char.IsLetterOrDigit()) -------------
+  
+public class Solution {
+    public bool IsPalindrome(string s) {
+        if (s.Length <= 1)  return true;
+        s = s.ToLower();
+        int i = 0;
+        int j = s.Length-1;
+        while(i <= j){
+            if (!Char.IsLetterOrDigit(s[i]))   {i++;   continue;}
+            if (!Char.IsLetterOrDigit(s[j]))   {j--;   continue;}
+            if (s[i] != s[j])   return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
