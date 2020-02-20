@@ -15,9 +15,11 @@ public class Solution {
         return true;
     }
 }
+
 <BETTER>
 -- OR -- 
-<LESS GOOD>
+<LESS GOOD THOUGH LESS RUNTIME>
+
 public class Solution {
     public bool IsValidSudoku(char[][] board) {
         for(int i = 0; i<9; i++){
