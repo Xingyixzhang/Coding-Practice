@@ -84,3 +84,74 @@ public class Solution {
         return true;
     }
 }
+
+Ditionary + HashSets -----------------------------------------------------------
+
+public class Solution {
+    public void SolveSudoku(char[,] board) {
+        Dictionary<int,HashSet<int>> rowdict = new Dictionary<int,HashSet<int>>();
+        Dictionary<int,HashSet<int>> coldict = new Dictionary<int,HashSet<int>>();
+        Dictionary<int,HashSet<int>> madict = new Dictionary<int,HashSet<int>>();
+        int start=0;bool flag=false;
+    
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i,j]!='.'){
+                    if(!rowdict.ContainsKey(i)){
+                        rowdict[i]=new HashSet<int>();
+                    }
+                    rowdict[i].Add(board[i,j]-'0');
+                    if(!coldict.ContainsKey(j)){
+                        coldict[j]=new HashSet<int>();
+                    }
+                    coldict[j].Add(board[i,j]-'0');
+                    int ma=i/3*10+j/3;
+                    if(!madict.ContainsKey(ma)){
+                        madict[ma]=new HashSet<int>();
+                    }
+                    madict[ma].Add(board[i,j]-'0');
+                }
+                else if(!flag){
+                    start=i*9+j;flag=true;
+                }
+            }
+        }
+        SolveSudoku(board,rowdict,coldict,madict,start);
+    }
+
+    public bool SolveSudoku(char[,] board,Dictionary<int,HashSet<int>> rowdict,Dictionary<int,HashSet<int>>             coldict,Dictionary<int,HashSet<int>> madict,int num){
+        if(num==81)return true;
+        int row = num/9;
+        int col = num%9;
+        int ma = row/3*10+col/3;
+        if(board[row,col]!='.'){
+            return SolveSudoku(board,rowdict,coldict,madict,num+1);
+        }
+        for(int i=1;i<=9;i++){
+            if((!rowdict.ContainsKey(row)||!rowdict[row].Contains(i))&&(!coldict.ContainsKey(col)||!coldict[col].Contains(i))&&(!madict.ContainsKey(ma)||!madict[ma].Contains(i))){
+                board[row,col]=Convert.ToChar(i+48);
+                if(!rowdict.ContainsKey(row)){
+                    rowdict[row]=new HashSet<int>();
+                }
+                rowdict[row].Add(i);
+                if(!coldict.ContainsKey(col)){
+                    coldict[col]=new HashSet<int>();
+                }
+                coldict[col].Add(i);
+                if(!madict.ContainsKey(ma)){
+                    madict[ma]=new HashSet<int>();
+                }
+                madict[ma].Add(i);
+                bool res=SolveSudoku(board,rowdict,coldict,madict,num+1);
+                if(res==true)return true;
+                else{
+                    board[row,col]='.';
+                    rowdict[row].Remove(i);
+                    coldict[col].Remove(i);
+                    madict[ma].Remove(i);
+                }
+            }
+        }
+        return false;
+    }
+}
