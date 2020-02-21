@@ -38,3 +38,49 @@ public class Solution {
         return true;
     }
 }
+
+*** Solve Sudoku using backTracking and recursion.
+
+public class Solution {
+    public void SolveSudoku(char[][] board) {
+        if (board == null || board.Length != 9 || board[0].Length != 9) return;
+        bool tmp = SudokuHelper(board, 0, 0);
+    }
+    
+    public bool SudokuHelper(char[][] board, int row, int col){
+        if (board == null || board.Length != 9) return false;
+        while (row < 9 && col < 9){
+            if (board[row][col] == '.') break;
+            if (col == 8)   {col = 0;    row++;}
+            else    col++;
+        }
+        
+        if (row >= 9)   return true;
+        int newRow = row + col/8;
+        int newCol = (col + 1)%9;
+        for (int num = 1; num <= 9; num++){
+            if (isValid(board, row, col, num)){
+                board[row][col] = Convert.ToChar(num + '0');
+                bool result = SudokuHelper(board, newRow, newCol);
+                if (result) return true;
+                board[row][col] = '.';  // BackTracking.
+            }
+        }
+        return false;
+    }
+    
+    public bool isValid(char[][] board, int row, int col, int num){
+        for (int i = 0; i < 9; i++){    // Check row and col.
+            if (board[row][i] == num + '0' || board[i][col] == num + '0')    return false;
+        }
+        // Check Square
+        int rowoff = (row/3)*3;
+        int coloff = (col/3)*3;
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                if (board[rowoff + i][coloff + j] == num + '0') return false;
+            }
+        }
+        return true;
+    }
+}
