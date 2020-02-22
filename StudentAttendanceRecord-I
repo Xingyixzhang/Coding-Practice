@@ -1,0 +1,23 @@
+public class Solution {
+    public bool CheckRecord(string s) {
+        int countA = 0, countL = 0;     
+    
+        for (int i = 0; i < s.Length; i++)
+        {
+            switch(s[i])
+            {
+                case 'L':
+                    if (++countL > 2) return false;                    
+                    break;          
+                case 'A':
+                    if (++countA > 1) return false;
+                    countL = 0;
+                    break;
+                default:
+                    countL = 0;
+                    break;
+        }
+    }
+    return true;
+    }
+}
