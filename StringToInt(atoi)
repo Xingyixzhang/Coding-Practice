@@ -1,34 +1,29 @@
 public class Solution {
     public int MyAtoi(string str) {
         if (str.Length == 0)    return 0;
+        if (str.Length == 1 && Char.IsDigit(str[0]))    return (str[0] - '0');
         int upper = (int)Math.Pow(2.0,31.0)-1, lower = (int)Math.Pow(-2.0,31.0);
         for (int i = 0; i < str.Length-1; i++){
             if (str[i] == ' ')  continue;
             else if (str[i] == '+' || str[i] == '-' || Char.IsDigit(str[i])){
                 int j = i+1;
+                if ((str[i] == '+' || str[i] == '-') && !Char.IsDigit(str[j]))   return 0;
                 while(j < str.Length){
                     if (Char.IsDigit(str[j]))   j++;
                     else    break;
                 }
-                if (j == i+1 && !Char.IsDigit(str[i]))   continue;
-                else {
-                    try{
-                        return Convert.ToInt32(str.Substring(i, j-i));
-                    }
-                    catch{
-                        string sub = str.Substring(i, j-i);
-                        string low = lower.ToString();
-                        if (str[i] == '-' && 
-                            
-                            
-                        }
-                    }
+                try{
+                    return Convert.ToInt32(str.Substring(i, j-i));
                 }
-                break;
+                catch{
+                    string sub = str.Substring(i, j-i);
+                    string low = lower.ToString();
+                    if (str[i] == '-')  return lower;
+                    else    return upper;
+                }
             }
             else    return 0;
         }
-        
         return 0;
     }
 }
