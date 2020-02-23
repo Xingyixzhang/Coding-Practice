@@ -1,0 +1,49 @@
+public class Solution 
+{
+    public int MySqrt(int x) 
+    {
+        if (x == 0 || x == 1) return x;
+        return BinarySearch(2, x, x);
+    }
+
+    private static int BinarySearch(int low, int high, int x)
+    {
+        int mid = low + ((high - low) / 2);
+        if (mid == x / mid) return mid;     //If you do mid * mid, it might overflow.
+        else if (mid > x / mid)
+        {
+            if ((mid - 1) <= x / (mid - 1))    //Check if (mid - 1)^2 becomes more than or equal to x
+                return mid - 1;     // This would mean you found the integer part of res.
+            return BinarySearch(low, mid - 2, x);
+        }
+        else
+        {
+            if ((mid + 1) > x / (mid + 1))     //Check if (mid + 1)^2 becomes more than x
+                return mid;     //This would mean you found the integer part of res.
+            return BinarySearch(mid + 2, high, x);
+        }
+    }
+}
+
+public class Solution {
+    public int MySqrt(int x) {
+        if (x == 0) return 0;
+        
+        long left = 0;
+        long right = int.MaxValue / 2 + 1;
+
+        while (left < right) {
+            long mid = left + (right - left) / 2;
+            long candidate = mid * mid;
+            if (candidate == mid) {
+                return (int)candidate;
+            } else if (candidate > x) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return (int)left - 1;
+    }
+}
