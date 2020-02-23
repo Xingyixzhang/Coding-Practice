@@ -1,0 +1,20 @@
+40ms -- HashSet --------------------------------
+
+public class Solution {
+    public bool IsHappy(int n) {
+        var myHash = new HashSet<int>();
+        
+        while (n != 1){
+            if (!myHash.Add(n)) return false;
+            myHash.Add(n);
+            int newn = 0;
+            while (n > 0){
+                newn += (n % 10) * (n % 10);
+                n = n / 10;
+            }
+            n = newn;
+        }
+        
+        return true;
+    }
+}
