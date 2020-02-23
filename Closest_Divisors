@@ -1,0 +1,16 @@
+public class Solution {
+    public int[] ClosestDivisors(int num) {
+        int[] result = {1, num + 1};
+        int min = num;
+        int[] original = new int[]{num + 1, num + 2};
+        foreach (int n in original) {
+            int d = (int)Math.Floor(Math.Sqrt(n)); 
+            while (d > 0 && n % d != 0)     d--; 
+            if (min > n / d - d) {
+                min = n / d - d;
+                result = new int[]{n / d, d};
+            } 
+        }
+        return result;        
+    }
+}
