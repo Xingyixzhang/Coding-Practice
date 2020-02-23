@@ -1,0 +1,31 @@
+public class Solution {
+    public bool IsUgly(int num) {
+        if (num == 0)   return false;
+        var list = new List<int>();
+        list.Add(2);
+        list.Add(3);
+        list.Add(5);
+        for (int i = 0; i < 3; i++){
+            while (num % list[i] == 0)  num = num / list[i];
+            if (num == 1)   return true;
+        }
+        return false;
+    }
+}
+
+same runtime, same thought process, implementing a public method -----------
+
+public class Solution {
+    public bool IsUgly(int num) {
+        if (num == 0)   return false;
+        num = isPrime(num, 2);
+        num = isPrime(num, 3);
+        num = isPrime(num, 5);
+        if (num == 1)   return true;
+        return false;
+    }
+    public int isPrime(int num, int fact){
+        while (num % fact == 0)  num = num / fact;
+        return num;
+    }
+}
