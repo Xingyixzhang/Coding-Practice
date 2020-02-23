@@ -48,3 +48,46 @@ public class Solution {
         return false;
     }
 }
+
+2 x 48ms Python3 same with the fast-slow two pointer method -----------------------------------------
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if not head or not head.next:   return False
+        slow, fast = head, head.next
+        while slow != fast:
+            if not fast or not fast.next:   return False
+            slow, fast = slow.next, fast.next.next
+        return True
+        
+ class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        while (head):
+            if head.next is None:    break
+            if head.val is None:    return True
+            head.val = None
+            head = head.next
+        return False
+
+44ms Python3, fast-slow method but simpler --------------------------------------------
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        slow = fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:    return True
+        return False
