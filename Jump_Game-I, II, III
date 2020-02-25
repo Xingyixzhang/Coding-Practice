@@ -1,0 +1,30 @@
+I -- GO TO LEETCODE AND CHECK OUT OTHER SOLUTION APPROACHES
+
+/*
+  Given an array of non-negative integers, you are initially positioned at the first index of the array.
+  Each element in the array represents your maximum jump length at that position.
+  Determine if you are able to reach the last index.
+*/
+
+public class Solution {
+    public bool CanJump(int[] nums) {
+        return reachFromLeft(nums, nums.Length - 1, 1);
+    }
+    public bool reachFromLeft(int[] nums, int position, int distance){
+        if (position == 0)  return true;
+        if (position < distance)    return false;
+        if (nums[position - distance] >= distance)
+            return reachFromLeft(nums, position - distance, 1);
+        else
+            return reachFromLeft(nums, position, distance + 1);
+    }
+}
+
+II -- 
+
+/*
+  Given an array of non-negative integers, you are initially positioned at the first index of the array.
+  Each element in the array represents your maximum jump length at that position.
+  Your goal is to reach the last index in the minimum number of jumps.
+*/
+
