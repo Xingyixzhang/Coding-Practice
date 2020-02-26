@@ -1,0 +1,41 @@
+// I -- 
+/*
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+Example 1:
+Input:
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+Output: [1,2,3,6,9,8,7,4,5]
+*/
+
+// Solution 1. Simulation --
+
+public class Solution {
+    public IList<int> SpiralOrder(int[][] matrix) {
+        if (matrix[0].Length <= 1) return matrix[0];
+        var result = new List<int>();
+        int m = 0, n = 0, di = 0;
+        int M = matrix.Length, N = matrix[0].Length;
+        bool[][] seen = new bool[M][];
+        int[] dm = {0,1,0,-1};
+        int[] dn = {1,0,-1,0};
+        
+        for (int i = 0; i < M * N; i++){
+            result.Add(matrix[m][n]);
+            seen[m][n] = true;              // DID NOT WORK, FIND OUT WHYYYYYYYY.
+            int x = m + dm[di];
+            int y = n + dn[di];
+            if (x >= 0 && x < M && y >= 0 && y < N && !seen[x][y])
+                { m = x;    n = y; }
+            else { di = (di + 1) % 4;    m += dm[di];    n += dn[di]; }
+        }
+            
+        return result;
+    }
+}
+
+// Solution 2. Layer by Layer --
+
