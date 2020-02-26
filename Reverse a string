@@ -1,0 +1,25 @@
+Python3 --
+
+1. Using loop:
+
+def reverse(s):
+  str = ""
+  for i in s:
+    str = i + str
+  return str
+  
+2. Using Recursion:
+
+def reverse(s):
+  if len(s) == 0:
+    return s
+  else:
+    return reverse(s[1:]) + s[0]
+  
+3. Using Stack:
+
+def reverse(string):
+  n = len(string)
+  stack = []
+  for i in range(0, n, 1):
+    stack.append(
