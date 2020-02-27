@@ -1,0 +1,12 @@
+public class Solution {
+    public int Reverse(int x) {
+        int reverse = 0, prev = 0;
+        while (x != 0){
+            reverse = reverse*10 + x%10;
+            if (reverse > (Math.Pow(2,31)-1) || reverse < Math.Pow(-2,31)) return 0;
+            else if (reverse / 10 != prev)  return 0;
+            else    { x /= 10;  prev = reverse;}
+        }
+        return reverse;
+    }
+}
