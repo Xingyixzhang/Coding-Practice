@@ -1,0 +1,12 @@
+public class Solution {
+    public uint reverseBits(uint n) {
+        int i = 32;
+        uint reversed = 0;
+        while (i > 0){
+            reversed = (reversed << 1 | (n & 1));
+            n >>= 1;
+            i--;
+        }
+        return reversed;
+    }
+}
