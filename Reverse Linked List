@@ -1,0 +1,43 @@
+Approach 1 -- Iterative:
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode ReverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null){
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+}
+
+Approach 2 -- Recursive: <Same runtime, NEED TO UNDERSTAND>
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode ReverseList(ListNode head) {
+        if (head == null || head.next == null)  return head;
+        ListNode newHead = ReverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+}
