@@ -10,6 +10,17 @@ public class Solution {
     }
 }
 
+** BEST WAY -- RECURSION
+
+public class Solution {
+    public bool IsPowerOfTwo(int n) {
+        if (n <= 0) return false;
+        if (n == 1) return true;
+        if (n % 2 != 0) return false;
+        else    return IsPowerOfTwo(n/2);
+    }
+}
+
 public class Solution {
     public bool IsPowerOfThree(int n) {
         if (n < 3 && n != 1)    return false;
