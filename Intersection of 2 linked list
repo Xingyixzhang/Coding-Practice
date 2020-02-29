@@ -1,0 +1,29 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode GetIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        int lenA = 1, lenB = 1;
+        ListNode tailA = headA, tailB = headB;
+        while (tailA.next != null){
+            tailA = tailA.next; lenA++;
+        }
+        while (tailB.next != null){
+            tailB = tailB.next; lenB++;
+        }
+        if (tailB != tailA) return null;
+        
+        int skip = Math.Abs(lenA - lenB);
+        if (lenA > lenB)    while (skip-- > 0)  headA = headA.next;
+        if (lenA < lenB)    while (skip-- > 0)  headB = headB.next;
+        
+        while (headA != headB) { headA = headA.next;    headB = headB.next; }
+        return headA;
+    }
+}
