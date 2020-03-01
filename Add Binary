@@ -1,0 +1,17 @@
+public class Solution {
+    public string AddBinary(string a, string b) {
+        string result = "";
+        int carry = 0, index = 0;
+        int lenA = a.Length, lenB = b.Length;
+        while (index < lenA || index < lenB || carry > 0){
+            int ax = index < lenA && a[lenA - index - 1] == '1' ? 1: 0;
+            int bx = index < lenB && b[lenB - index - 1] == '1' ? 1: 0;
+            int num = ax + bx + carry;
+            carry = (num > 1) ? 1: 0;
+            num %= 2;
+            result = num + result;
+            index ++;
+        }
+        return result;
+    }
+}
