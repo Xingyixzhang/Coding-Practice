@@ -1,0 +1,14 @@
+public class Solution {
+    public bool BackspaceCompare(string S, string T) {
+        string Decode(string source){
+            var s = new Stack<char>();
+            foreach (var c in source){
+                if (c == '#')
+                { if (s.Count > 0)    s.Pop(); }
+                else    s.Push(c);
+            }
+            return new string(s.ToArray());
+        }
+        return string.Compare(Decode(S), Decode(T), StringComparison.Ordinal) == 0;
+    }
+}
