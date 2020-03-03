@@ -13,18 +13,21 @@ public class Solution {
 }
 
 public class Solution {
-    public int SingleNumber(int[] nums)
-        {
+    public int SingleNumber(int[] nums){
+            if (nums == null)   return -1;
             int sum = 0;
             foreach(var item in nums){
                 sum ^= item;
             }
             return sum;
-        }
     }
 }
+
 ***
-“^=”(Bitwise Exclusive OR) : This operator is combination of ‘^’ and ‘=’ operators. This operator first “Bitwise Exclusive OR” the current value of the variable on left by the value on the right and then assigns the result to the variable on the left.
+“^=”(Bitwise Exclusive OR) : This operator is combination of ‘^’ and ‘=’ operators. 
+This operator first “Bitwise Exclusive OR” the current value of the variable on left by the value on the right 
+and then assigns the result to the variable on the left.
+
 Example :
 (a ^= 2) can be written as (a = a ^ 2)
 If initially value stored in a is 6. Then (a ^= 2) = 4.
