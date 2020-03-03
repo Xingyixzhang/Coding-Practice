@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+ APPROACH 1 -- RECURSIVE ----------------------------------------------
+ 
+public class Solution {
+    public IList<int> InorderTraversal(TreeNode root) {
+        List<int> result = new List<int>();
+        help(root, result);
+        return result;
+    }
+    public void help(TreeNode root, List<int> result){
+        if (root != null){
+            if (root.left != null)  help(root.left, result);
+            result.Add(root.val);
+            if (root.right != null) help(root.right, result);
+        }
+    }
+}
+
+APPROACH 2 -- ITERATIVE -------------------------------------------------
+
