@@ -1,0 +1,29 @@
+public class Solution {
+    public IList<IList<int>> Generate(int numRows) {
+        IList<IList<int>> pascal = new List<IList<int>>();
+        IList<int> prevRow = numRows > 0 ? new List<int>(numRows){1}: null;
+        
+        for (int i = 1; i <= numRows; i++){
+            for (int j = prevRow.Count - 1; j > 0; j--) prevRow[j] += prevRow[j-1];
+            IList<int> row = new List<int>(prevRow);
+            pascal.Add(row);
+            prevRow.Add(0);
+        }
+        return pascal;
+    }
+}
+
+public class Solution {
+    public IList<IList<int>> Generate(int numRows) {
+        IList<IList<int>> rows = new List<IList<int>>(numRows);
+        for (int i = 1; i <= numRows; i++){
+            IList<int> row = new List<int>(new int[i]);
+            rows.Add(row);
+            for (int j = 0; j < i; j++){
+                if (j == 0 || j == i - 1)   row[j] = 1;
+                else    row[j] = rows[i-2][j-1] + rows[i-2][j];
+            }
+        }
+        return rows;
+    }
+}
