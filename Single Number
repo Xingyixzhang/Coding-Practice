@@ -31,3 +31,46 @@ and then assigns the result to the variable on the left.
 Example :
 (a ^= 2) can be written as (a = a ^ 2)
 If initially value stored in a is 6. Then (a ^= 2) = 4.
+
+XOR is defined as exclusive or for two integers say a and b.
+To find XOR, we will first find the binary representation of both a and b. 
+Lets do this also by example. Suppose a = 7 and b = 10. 
+So binary representation of a = 111 (see explanation above) and b = 1010 (see explanation above). 
+Now if we add 0 before integers it remains same, this applies to binary representation also. As binary representation of a contains less bits than b we will write a as 0111 because adding 0 before doesn’t make any difference. 
+
+Now XOR of a and b will be : 
+a       = 0 1 1 1		(I have expressed the representation by spaces just for easy understanding)
+b       = 1 0 1 0
+XOR= 1 1 0 1
+i.e we find XOR for each corresponding bits.
+First lets see the rules for XOR
+Rule 1 : If both bits are 1 then XOR’ed bit will be 0.
+Rule 2 : If both bits are 0 then XOR’ed bit will be 0.
+Rule 3 : If one bit is 0 and one bit is 1 XOR’ed bit will be 1.
+
+
+In the above example we find XOR’ed bit for each corresponding pair of bits.
+(First Bit Pair) 0 XOR 1 = 1 (Rule 3)
+(Second Bit Pair) 1 XOR 0 = 1 (Rule 3)
+(Third Bit Pair) 1 XOR 1  = 0 (Rule 1)
+(Fourth Bit Pair) 1 XOR 0 = 1 (Rule 3)
+So, finally we get a XOR b as 1101.
+To find XOR of more than two numbers, represent all numbers in binary representation, add 0’s before if necessary. Write them like this. 
+0 1 1 1 0
+0 1 1 0 1
+1 0 0 1 0
+and so on.
+To find each bit of XOR just calculate number of 1’s in the corresponding bits. If it is even or zero then that XOR’ed bit is 0. If it is odd then that XOR’ed bit is 1.
+For the above example.
+(First corresponding bits) 0 XOR 0 XOR 1 = 1
+(Second corresponding bits) 1 XOR 1 XOR 0 = 0
+(Third corresponding bits) 1 XOR 1 XOR 0 = 0
+(Fourth corresponding bits) 1 XOR 0 XOR 1 = 0
+(Fifth corresponding bits) 0 XOR 1 XOR 0 = 1
+So, final XOR will be 10001.
+So, this seems to be complicated. In all languages you can XOR two integers say a and b by ‘^’ this operation.
+i.e to find a XOR b, just do a^b (this operation is defined in all languages).
+Some more rules related to XOR (now i will just represent XOR by ‘^’).
+a^a = 0
+
+0^a = a
