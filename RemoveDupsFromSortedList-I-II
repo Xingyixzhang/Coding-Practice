@@ -1,0 +1,81 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode DeleteDuplicates(ListNode head) {
+        ListNode root = head;
+        while (head != null){
+            ListNode temp = head;
+            while (head != null && temp.val == head.val)
+                head = head.next;
+            temp.next = head;
+        }
+        return root;
+    }
+}
+
+BETTER SOLUTION -----------------------------------------------
+
+public class Solution {
+    public ListNode DeleteDuplicates(ListNode head) {
+        if (head == null || head.next == null)  return head;
+        var temp = head;
+        while (temp.next != null){
+          if (temp.next.val == temp.val){
+            if (temp.next.val != null)  temp.next = temp.next.next;
+            else  temp.next = null;
+          }
+          else  temp = temp.next;
+        }
+        return head;
+    }
+}
+
+Level II --
+* Given a sorted linked list, delete all nodes that have duplicate numbers, 
+* leaving only distinct numbers from the original list.
+* Return the linked list sorted as well.
+Example 1:
+Input: 1->2->3->3->4->4->5
+Output: 1->2->5
+
+Example 2:
+Input: 1->1->1->2->3
+Output: 2->3
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode DeleteDuplicates(ListNode head) {
+        ListNode puppet = new ListNode(-1);
+        puppet.next = head;
+        ListNode curr = head;
+        ListNode prev = puppet;
+        
+        while (curr != null && curr.next != null){
+            if (curr.val == curr.next.val){
+                while (prev.next != null && prev.next.val == curr.val)
+                    prev.next = prev.next.next;
+                curr = prev.next;
+            }
+            else {
+                prev = curr;
+                curr = curr.next;
+                prev.next = curr;
+            }
+        }
+        
+        return puppet.next;
+    }
+}
