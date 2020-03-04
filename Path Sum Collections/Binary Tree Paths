@@ -1,0 +1,24 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    private static string PathMaker = "->";
+    public IList<string> BinaryTreePaths(TreeNode root) {
+        IList<string> res = new List<string>();
+        if (root == null)   return res;
+        BinaryTreePathHelp(root, res, "");
+        return res;
+    }
+    private static void BinaryTreePathHelp(TreeNode root, IList<string> res, string path){
+        string currValue = root.val.ToString();
+        if (root.left == null && root.right == null)    res.Add(path + currValue);
+        if (root.left != null)  BinaryTreePathHelp(root.left, res, path + currValue + PathMaker);
+        if (root.right != null)  BinaryTreePathHelp(root.right, res, path + currValue + PathMaker);
+    }
+}
