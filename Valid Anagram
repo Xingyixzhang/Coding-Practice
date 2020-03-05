@@ -7,3 +7,18 @@ public class Solution {
         return (str1.SequenceEqual(str2));
     }
 }
+
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        if (s.Length != t.Length)   return false;
+        int[] counter = new int[26];
+        for (int i = 0; i < s.Length; i++){
+            counter[s[i] - 'a']++;
+            counter[t[i] - 'a']--;
+        }
+        foreach (int item in counter){
+            if (item != 0)  return false;
+        }
+        return true;
+    }
+}
