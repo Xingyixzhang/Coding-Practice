@@ -26,3 +26,5 @@ public class Solution {
         return true;
     }
 }
+
+// Check before the game, (Sum of Odds) >? (Sum od Evens)
