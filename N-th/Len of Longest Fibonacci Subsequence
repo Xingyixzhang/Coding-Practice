@@ -9,3 +9,24 @@ class Solution:
                     x, y, length = y, x+y, length+1
                 result = max(length, result)
         return result if result > 2 else 0
+
+C# ------------------------------------------------------
+
+public class Solution {
+    public int LenLongestFibSubseq(int[] A) {
+        HashSet<int> lookup = new HashSet<int>();
+        for (int i = 0; i < A.Length; i++)  lookup.Add(A[i]);
+        int res = 2;
+        for (int i = 0; i < A.Length; i++){
+            for (int j = i+1; j < A.Length; j++){
+                int x = A[i], y = A[j], length = 2;
+                while (lookup.Contains(x+y)){
+                    int temp = x;
+                    x = y;  y = temp+y; length++;
+                }
+                res = Math.Max(res, length);
+            }
+        }
+        return res > 2? res: 0;
+    }
+}
