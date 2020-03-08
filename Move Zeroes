@@ -1,0 +1,13 @@
+public class Solution {
+    public void MoveZeroes(int[] nums) {
+        int count = 0;
+        int[] arr = new int[nums.Length];
+        for (int i = 0; i < nums.Length; i++){
+            if (nums[i] != 0) nums[i-count] = nums[i];
+            else    count++;
+        }
+        for (int i = count; i > 0; i--){
+            nums[nums.Length-i] = 0;
+        }
+    }
+}
