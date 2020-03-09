@@ -1,0 +1,52 @@
+Question-- 
+Given a binary tree, determine if it is height-balanced.
+
+For this problem, a height-balanced binary tree is defined as:
+
+a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+
+Example 1:
+
+Given the following tree [3,9,20,null,null,15,7]:
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+Return true.
+
+Example 2:
+
+Given the following tree [1,2,2,3,3,null,null,4,4]:
+
+       1
+      / \
+     2   2
+    / \
+   3   3
+  / \
+ 4   4
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public bool IsBalanced(TreeNode root) {
+        bool res = true;
+        int DFS(TreeNode node){
+            if (node == null)   return 0;
+            int left = DFS(node.left), right = DFS(node.right);
+            if (Math.Abs(left - right) > 1) res = false;
+            return Math.Max(left, right) + 1;
+        }
+        DFS(root);
+        return res;
+    }
+}
