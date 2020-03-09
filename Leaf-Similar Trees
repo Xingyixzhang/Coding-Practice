@@ -1,0 +1,34 @@
+Question --
+Consider all the leaves of a binary tree.  From left to right order, the values of those leaves form a leaf value sequence.
+For example, in the given tree above, the leaf value sequence is (6, 7, 4, 9, 8).
+
+Two binary trees are considered leaf-similar if their leaf value sequence is the same.
+
+Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.
+Note:
+Both of the given trees will have between 1 and 100 nodes.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public bool LeafSimilar(TreeNode root1, TreeNode root2) {
+        var leaf1 = new List<int>();
+        var leaf2 = new List<int>();
+        helper(root1, leaf1);
+        helper(root2, leaf2);
+        return leaf1.SequenceEqual(leaf2);
+    }
+    public void helper(TreeNode node, List<int> leaf){
+        if (node == null)   return null;
+        if (node.left == null && node.right == null) leaf.Add(node.val);
+        helper(node.left, leaf);
+        helper(node.right, leaf);
+    }
+}
