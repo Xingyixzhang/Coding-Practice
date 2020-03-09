@@ -1,0 +1,28 @@
+Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.
+
+Example:
+
+Input:
+
+   1
+    \
+     3
+    /
+   2
+
+Output:
+1
+
+Explanation:
+The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3). 
+    
+    int minSum = Int32.MaxValue, prev = Int32.MaxValue;
+    public int GetMinimumDifference(TreeNode root) {
+        if(root==null)  return 0;
+        GetMinimumDifference(root.left);
+        if(Math.Abs(prev-root.val) < minSum)
+            minSum = Math.Abs(prev-root.val);
+        prev = root.val;
+        GetMinimumDifference(root.right);
+        return minSum;
+    }
