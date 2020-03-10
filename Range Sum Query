@@ -1,0 +1,43 @@
+Slowest:
+
+public class NumArray {
+    private int[] data;
+    public NumArray(int[] nums) {
+        data = nums;
+    }
+    public int SumRange(int i, int j) {
+        return data.Skip(i).Take(j-i+1).Sum();
+    }
+}
+
+Mid: Brute Force
+
+public class NumArray {
+    private int[] data;
+    public NumArray(int[] nums) {
+        data = nums;
+    }
+    public int SumRange(int i, int j) {
+        int sum = 0;
+        for (int m = i; m <= j; m++){
+            sum += data[m];
+        }
+        return sum;
+    }
+}
+
+Fastest (O(1)) Caching
+
+public class NumArray {
+    private int[] sum;
+    public NumArray(int[] nums) {
+        sum = new int[nums.Length + 1];
+        for (int i = 0; i < nums.Length; i++){
+            sum[i+1] = sum[i] + nums[i];
+        }
+    }
+    
+    public int SumRange(int i, int j) {
+        return sum[j+1]-sum[i];
+    }
+}
