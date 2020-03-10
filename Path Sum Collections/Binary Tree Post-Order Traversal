@@ -1,0 +1,22 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public IList<int> PostorderTraversal(TreeNode root) {
+        var res = new List<int>();
+        Helper(root, res);
+        return res;
+    }
+    public void Helper(TreeNode node, List<int> res){
+        if (node == null)   return;
+        Helper(node.left, res);
+        Helper(node.right, res);
+        res.Add(node.val);
+    }
+}
