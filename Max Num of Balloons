@@ -1,0 +1,18 @@
+public class Solution {
+    public int MaxNumberOfBalloons(string text) {
+        var wordPattern = new Dictionary<char, int>(){
+            {'b', 1}, {'a', 1}, {'l', 2}, {'o', 2}, {'n', 1}
+        };
+        var pairs = new Dictionary<char, int>();
+        for (int i = 0; i < text.Length; i++){
+            if (!pairs.ContainsKey(text[i]))    pairs.Add(text[i], 1);
+            else    pairs[text[i]]++;
+        }
+        int count = Int32.MaxValue;
+        foreach (var kvp in wordPattern){
+            if (!pairs.ContainsKey(kvp.Key))    return 0;
+            count = Math.Min(count, pairs[kvp.Key]/kvp.Value);
+        }
+        return count;
+    }
+}
