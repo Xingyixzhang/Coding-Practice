@@ -1,0 +1,14 @@
+public class Solution {
+    public bool IsPerfectSquare(int num) {
+        if (num == 1)   return true;
+        if (num < 4)    return false;
+        int div = 2;
+        while (div < int.MaxValue / div){
+            int sqr = div * div;
+            if (sqr == num) return true;
+            else if (sqr > num) return false;
+            div ++;
+        }
+        return false;
+    }
+}
