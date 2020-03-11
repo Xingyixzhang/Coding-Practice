@@ -1,0 +1,13 @@
+public class Solution {
+    public int[] Intersection(int[] nums1, int[] nums2) {
+        var hash1 = new HashSet<int>();
+        var hash2 = new HashSet<int>();
+        foreach (int i in nums1)    hash1.Add(i);
+        foreach (int i in nums2)
+            if (hash1.Contains(i))  hash2.Add(i);
+        int[] res = new int[hash2.Count];
+        int index = 0;
+        foreach (int i in hash2)    res[index++] = i;
+        return res;
+    }
+}
