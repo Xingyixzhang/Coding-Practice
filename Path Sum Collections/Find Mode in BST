@@ -29,10 +29,11 @@ public class Solution {
     public int[] FindMode(TreeNode root) {
         var modes = new List<int>();
         Traverse(root, modes);
-        int[] result = new int[modes.Count];
-        for (int i = 0; i < modes.Count; i++)
-            result[i] = modes[i];
-        return result;
+        // int[] result = new int[modes.Count];
+        // for (int i = 0; i < modes.Count; i++)
+        //     result[i] = modes[i];
+        // return result;
+        return modes.ToArray();
     }
     
     public void Traverse(TreeNode node, List<int> modes) {
