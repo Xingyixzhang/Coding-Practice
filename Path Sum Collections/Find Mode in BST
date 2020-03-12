@@ -1,0 +1,54 @@
+Given a binary search tree (BST) with duplicates, find all the mode(s) (the most frequently occurred element) in the given BST.
+
+Assume a BST is defined as follows:
+
+The left subtree of a node contains only nodes with keys less than or equal to the node's key.
+The right subtree of a node contains only nodes with keys greater than or equal to the node's key.
+Both the left and right subtrees must also be binary search trees.
+ 
+For example:
+Given BST [1,null,2,2],
+
+   1
+    \
+     2
+    /
+   2
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    int prev = -1, count = 1, max = 0;
+    public int[] FindMode(TreeNode root) {
+        var modes = new List<int>();
+        Traverse(root, modes);
+        int[] result = new int[modes.Count];
+        for (int i = 0; i < modes.Count; i++)
+            result[i] = modes[i];
+        return result;
+    }
+    
+    public void Traverse(TreeNode node, List<int> modes) {
+        if (node == null)   return;
+        Traverse(node.left, modes);
+        if (prev != null){
+            if (prev == node.val)   count++;
+            else count = 1;
+        }
+        if (count > max){
+            max = count;
+            modes.Clear();
+            modes.Add(node.val);
+        }
+        else if (count == max)  modes.Add(node.val);
+        prev = node.val;
+        Traverse(node.right, modes);
+    }
+}
