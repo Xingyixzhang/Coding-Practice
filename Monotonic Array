@@ -3,9 +3,6 @@ An array is monotonic if it is either monotone increasing or monotone decreasing
 An array A is monotone increasing if for all i <= j, A[i] <= A[j].  An array A is monotone decreasing if for all i <= j, A[i] >= A[j].
 
 Return true if and only if the given array A is monotonic.
-
- 
-
 Example 1:
 
 Input: [1,2,2,3]
@@ -49,6 +46,24 @@ public class Solution {
                     if (A[j] > A[j-1])  return false;
                 }
             }
+        }
+        return true;
+    }
+}
+--------------------------------------------------------------------------
+public class Solution {
+    public bool IsMonotonic(int[] A) {
+        bool isInc = false, isSame = false;
+        if(A[0]<A[A.Length-1])
+            isInc = true;
+        if(A[0] == A[A.Length-1])
+            isSame = true;
+        for(int i = 1; i<A.Length; i++)
+        {
+            if(A[i]>A[i-1] && (isInc == false || isSame == true))
+                return false;
+            if(A[i]<A[i-1] && (isInc == true||isSame == true))
+                return false;
         }
         return true;
     }
