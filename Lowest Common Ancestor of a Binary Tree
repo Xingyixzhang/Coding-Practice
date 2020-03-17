@@ -1,0 +1,79 @@
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+Given the following binary tree:  root = [3,5,1,6,2,0,8,null,null,7,4]
+Example 1:
+
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+Output: 3
+Explanation: The LCA of nodes 5 and 1 is 3.
+Example 2:
+
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+Output: 5
+Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+ 
+Note:
+
+All of the nodes' values will be unique.
+p and q are different and both values will exist in the binary tree.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+ -------------------------------RECURSIVELY -------------------------------------
+public class Solution {
+    private TreeNode res;
+    public Solution(){
+        this.res = null;
+    }
+    private bool recurseTree(TreeNode currNode, TreeNode p, TreeNode q){
+        if (currNode == null)   return false;
+        int left = this.recurseTree(currNode.left, p, q)? 1: 0;
+        int right = this.recurseTree(currNode.right, p, q)? 1: 0;
+        int mid = (currNode == p || currNode == q)? 1: 0;
+        if (mid + left + right >= 2)    this.res = currNode;
+        return (mid + left + right > 0);
+    }
+    public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        this.recurseTree(root, p, q);
+        return this.res;
+    }
+}
+
+----------------------------ITERATIVE USING PARENT POINTERS --------------------
+public class Solution {
+    public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        var stack = new Stack<TreeNode>();
+        var parent = new Dictionary<TreeNode, TreeNode>();
+        parent.Add(root, null);
+        stack.Push(root);
+        while (!parent.ContainsKey(p) || !parent.ContainsKey(q)){
+            TreeNode node = stack.Pop();
+            if (node.left != null){
+                parent.Add(node.left, node);
+                stack.Push(node.left);
+            }
+            if (node.right != null){
+                parent.Add(node.right, node);
+                stack.Push(node.right);
+            }
+        }
+        var ancestors = new HashSet<TreeNode>();
+        // Process all ancestors for node p using parent pointers.
+        while (p != null){
+            ancestors.Add(p);
+            p = parent[p];
+        }
+        // res will be the first ancestor of q which appears in p's ancestors.
+        while (!ancestors.Contains(q))  q = parent[q];
+        return q;
+    }
+}
