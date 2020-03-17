@@ -1,0 +1,51 @@
+Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+
+Note: A leaf is a node with no children.
+
+Example:
+
+Given the below binary tree and sum = 22,
+
+      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \    / \
+7    2  5   1
+Return:
+
+[
+   [5,4,11,2],
+   [5,8,4,5]
+]
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public IList<IList<int>> PathSum(TreeNode root, int sum) {
+        var res = new List<IList<int>>();
+        DFS(root, sum, new List<int>(), res);
+        return res;
+    }
+    private void DFS(TreeNode root, int sum, IList<int> oneResult, IList<IList<int>> result) {
+        if (root == null) return;
+        oneResult.Add(root.val);
+        if (root.left == null && root.right == null) {
+            if (sum == root.val) {
+                result.Add(new List<int>(oneResult));
+            }
+        } else {
+            DFS(root.left, sum - root.val, oneResult, result);
+            DFS(root.right, sum - root.val, oneResult, result);
+        }
+        oneResult.RemoveAt(oneResult.Count - 1);
+    }
+}
