@@ -1,0 +1,15 @@
+public class Solution {
+    public string Convert(string s, int numRows) {
+        if (numRows == 1)   return s;
+        StringBuilder res = new StringBuilder();
+        int n = s.Length, cyclelen = 2 * numRows - 2;
+        for (int i = 0; i < numRows; i++){
+            for (int j = 0; j < n - i; j += cyclelen){
+                res.Append(s[j+i]);
+                if (i != 0 && i != numRows - 1 && j + cyclelen < n+i)
+                    res.Append(s[j + cyclelen - i]);
+            }
+        }
+        return res.ToString();
+    }
+}
