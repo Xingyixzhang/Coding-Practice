@@ -1,0 +1,41 @@
+Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+
+Example:
+
+Input: [1,2,3,null,5,null,4]
+Output: [1, 3, 4]
+Explanation:
+
+   1            <---
+ /   \
+2     3         <---
+ \     \
+  5     4       <---
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public IList<int> RightSideView(TreeNode root) {
+        var res = new List<int>();
+        if (root == null)   return res;
+        var q = new Queue<TreeNode>();
+        q.Enqueue(root);
+        while (q.Count != 0){
+            int size = q.Count;
+            res.Add(q.Peek().val);
+            for (int i = 0; i < size; i++){
+                var curr = q.Dequeue();
+                if (curr.right != null) q.Enqueue(curr.right);
+                if (curr.left != null)  q.Enqueue(curr.left);
+            }
+        }
+        return res;
+    }
+}
