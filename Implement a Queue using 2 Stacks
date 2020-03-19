@@ -1,0 +1,19 @@
+class Queue<T> where T: class
+{
+    private Stack<T> input = new Stack<T>();
+    private Stack<T> output = new Stack<T>();
+    
+    public void Enqueue(T value)
+    {
+        intput.Push(value);
+    }
+    
+    public T Dequeue()
+    {
+        if (output.Count == 0)
+        {
+            while (input.Count != 0)  output.Push(intput.Pop());
+        }
+        return output.Pop();
+    }
+}
