@@ -56,7 +56,7 @@ public class Solution {
             last.right = temp;
         }
         
-        Flatten(root.left);
+        // Flatten(root.left);
         Flatten(root.right);
     }
 }
