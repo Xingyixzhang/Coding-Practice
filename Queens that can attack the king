@@ -1,0 +1,29 @@
+On an 8x8 chessboard, there can be multiple Black Queens and one White King.
+
+Given an array of integer coordinates queens that represents the positions of the Black Queens, 
+and a pair of coordinates king that represent the position of the White King, 
+return the coordinates of all the queens (in any order) that can attack the King.
+
+public class Solution {
+    public IList<IList<int>> QueensAttacktheKing(int[][] queens, int[] king) {
+        var res = new List<IList<int>>();   int n = 8;
+        bool[,] q = new bool[n,n];
+        foreach (var queen in queens){
+            q[queen[0], queen[1]] = true;
+        }
+        int[,] directions = new int[,] {{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1}};
+        for (int i = 0; i < n; i++){
+            int row = king[0] + directions[i,0];
+            int col = king[1] + directions[i,1];
+            while (row >= 0 && row < n && col >= 0 && col < n){
+                if (q[row,col]){
+                    res.Add(new List<int>{row, col});
+                    break;
+                }
+                row += directions[i,0];
+                col += directions[i,1];
+            }
+        }
+        return res;
+    }
+}
