@@ -1,0 +1,31 @@
+Given a List of words, return the words that can be typed using letters of alphabet 
+on only one row's of American keyboard like the image below.
+Example:
+
+Input: ["Hello", "Alaska", "Dad", "Peace"]
+Output: ["Alaska", "Dad"]
+ 
+
+Note:
+
+You may use one character in the keyboard more than once.
+You may assume the input string will only contain letters of alphabet.
+
+public class Solution {
+    public string[] FindWords(string[] words) {
+        int[] row1 = ToCountChar("qwertyuiop");
+        int[] row2 = ToCountChar("asdfghjkl");
+        int[] row3 = ToCountChar("zxcvbnm");
+        return words.Where(w => All(row1, w) || All(row2, w) || All(row3, w)).ToArray();
+    }
+    public int[] ToCountChar(string s){
+        int[] arr = new int[26];
+        foreach (char ch in s)  arr[ch - 'a'] = 1;
+        return arr;
+    }
+    public bool All(int[] row, string input){
+        foreach (char ch in input.ToLower())
+            if (row[ch - 'a'] == 0)  return false;
+        return true;
+    }
+}
