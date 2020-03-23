@@ -39,7 +39,7 @@ target is a lowercase letter.
 ------------------------------------------------------ASCII ---------------------------
 public class Solution {
     public char NextGreatestLetter(char[] letters, char target) {
-        bool[] seen = new bool[26];
+        bool[] seen = new bool[26];     // default value => false
         foreach (char ch in letters)    seen[ch - 'a'] = true;
         while (true){
             target++;
