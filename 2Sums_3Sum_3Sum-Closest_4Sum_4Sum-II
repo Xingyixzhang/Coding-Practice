@@ -53,6 +53,40 @@ public class Solution {
     }
 }
 
+TWO SUM (INPUT IS A BST) ----------------------------------------------------------------------------------
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public bool FindTarget(TreeNode root, int k) {
+        var list = new List<int>();
+        Inorder(root, list);
+        int i = 0, j = list.Count-1;
+        while (i < j){
+            int sum = list[i] + list[j];
+            if (sum == k)   return true;
+            if (sum < k)    i++;
+            else    j--;
+        }
+        return false;
+    }
+    public void Inorder(TreeNode root, List<int> list){
+        if (root == null)   return;
+        Inorder(root.left, list);
+        list.Add(root.val);
+        Inorder(root.right, list);
+    }
+}
+
+=====================================================================================================
+
 // *** 3Sum -- Two Pointers
 /*
  * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
