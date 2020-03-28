@@ -1,0 +1,36 @@
+Given a binary tree root. Split the binary tree into two subtrees by removing 1 edge such that the product of the sums of the subtrees are maximized.
+
+Since the answer may be too large, return it modulo 10^9 + 7.
+Example 1:
+Input: root = [1,2,3,4,5,6]
+Output: 110
+Explanation: Remove the red edge and get 2 binary trees with sum 11 and 10. Their product is 110 (11*10)
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution 
+{
+    HashSet<int> hashSet = new HashSet<int>();
+    public int MaxProduct(TreeNode root) 
+    {
+        var sum = TreeSum(root);
+        long max = 0;
+        foreach(var num in hashSet)
+            max = Math.Max(max, (long) (sum - num) * (long) num);
+        return (int) (max % 1_000_000_007);
+    }
+    private int TreeSum(TreeNode root)
+    {
+        if(root == null) return 0;
+        var sum = root.val + TreeSum(root.left) + TreeSum(root.right);
+        hashSet.Add(sum);
+        return sum;
+    }
+}
