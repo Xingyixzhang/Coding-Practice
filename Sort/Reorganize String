@@ -1,0 +1,42 @@
+Given a string S, check if the letters can be rearranged so that two characters that are adjacent to each other are not the same.
+
+If possible, output any possible result.  If not possible, return the empty string.
+
+Example 1:
+
+Input: S = "aab"
+Output: "aba"
+Example 2:
+
+Input: S = "aaab"
+Output: ""
+Note:
+
+S will consist of lowercase letters and have length in range [1, 500].
+
+public class Solution {
+    public string ReorganizeString(string S) {
+        if (S.Length < 2)   return S;
+        int n = S.Length;
+        int freqChar = -1, freqCharCount = -1;
+        int[] freq = new int[26];
+        for (int i = 0; i < n; i++){
+            freq[S[i]-'a']++;
+            if (freq[S[i]-'a'] > freqCharCount){
+                freqCharCount = freq[S[i] - 'a'];
+                freqChar = S[i] - 'a';
+            }
+        }
+        if (freqCharCount > (n + 1) / 2)    return "";
+        var res = new StringBuilder(S);
+        int pos = 0;
+        for (int i = -1; i < 26; i++){
+            int curr = (i==-1)? freqChar: i;
+            while (freq[curr]-- > 0){
+                res[pos] = (char)('a' + curr);
+                pos = (pos + 2 >= n)? 1: pos + 2;
+            }
+        }
+        return res.ToString();
+    }
+}
