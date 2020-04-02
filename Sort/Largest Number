@@ -1,0 +1,11 @@
+public class Solution {
+    public string LargestNumber(int[] nums) {
+        Array.Sort(nums, (a, b) => $"{b}{a}".CompareTo($"{a}{b}"));
+        var res = new StringBuilder();
+        foreach (int num in nums){
+            res.Append(num);
+        }
+        if (nums[0] == 0)   return "0";
+        return res.ToString();
+    }
+}
