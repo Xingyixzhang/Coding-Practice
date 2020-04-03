@@ -1,0 +1,27 @@
+public class Solution {
+    public int[][] AllCellsDistOrder(int R, int C, int r0, int c0) {
+        int row = R - 1, col = C - 1;
+        var max = Math.Max(Math.Max(r0 + c0, row - r0 + c0), 
+                           Math.Max(row - r0 + col - c0, r0 + col - c0));
+        
+        int[][] res = new int[R*C][];
+        int index = 0;
+        res[index++] = new[] { r0, c0 };
+        
+        for (int i = 1; i <= max; i++){
+            int rowTop = Math.Max(0, r0 - i),
+                rowBot = Math.Min(row, r0 + i);
+            for (int r = rowTop; r <= rowBot; r++){
+                int distance = Math.Abs(r0 - r);
+                int ci = i - distance, c = c0 - ci;
+                
+                if (c >= 0) res[index++] = new[] {r, c};
+                if (ci > 0){
+                    c = c0 + ci;
+                    if (c < C)  res[index++] = new[] {r,c};
+                }
+            }
+        }
+        return res;
+    }
+}
