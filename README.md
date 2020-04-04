@@ -5,8 +5,8 @@ My Leetcode problem collection is to help learn **algorithms** and **data struct
 
 ### Sorting Algorithms --
 1. Insertoin Sort
+
 ![Video Explaination for Insertion Sort](http://img.youtube.com/vi/OGzPmgsI-pQ/0.jpg)
-***
 ```cs
 void InsertionSort(int[] arr){
   int j, temp;
@@ -21,10 +21,12 @@ void InsertionSort(int[] arr){
   }
 }
 ```
+***
 2. Selection Sort
 ```cs
 
 ```
+***
 3. Bubble Sort
 ```cs
 void BubbleSort(int[] arr){
@@ -40,10 +42,12 @@ void BubbleSort(int[] arr){
       }
 }
 ```
+***
 4. Merge Sort
 ```cs
 
 ```
+***
 5. Quick Sort
 ```cs
 
