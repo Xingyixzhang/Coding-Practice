@@ -6,7 +6,7 @@ My Leetcode problem collection is to help learn **algorithms** and **data struct
 ### Sorting Algorithms --
 1. Insertoin Sort
 
-![Video Explaination for Insertion Sort](http://img.youtube.com/vi/OGzPmgsI-pQ/0.jpg)
+[![Video Explaination for Insertion Sort](http://img.youtube.com/vi/OGzPmgsI-pQ/0.jpg)](http://www.youtube.com/watch?v=OGzPmgsI-pQ)
 ```cs
 void InsertionSort(int[] arr){
   int j, temp;
