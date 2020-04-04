@@ -4,11 +4,26 @@ My Leetcode problem collection is to help learn **algorithms** and **data struct
 ## Algorithms
 
 ### Sorting Algorithms --
-#### Insertoin Sort
+1. Insertoin Sort
+```cs
+void InsertionSort(int[] arr){
+  int j, temp;
+  for (int i = 1, i < arr.Length; i++){
+    temp = arr[i];
+    j = i - 1;
+    while (j >= 0 && arr[j] > temp){
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = temp;
+  }
+}
+```
+2. Selection Sort
+```cs
 
-#### Selection Sort
-
-#### Bubble Sort
+```
+3. Bubble Sort
 ```cs
 void BubbleSort(int[] arr){
   int n = arr.Length;
@@ -23,6 +38,11 @@ void BubbleSort(int[] arr){
       }
 }
 ```
-#### Merge Sort
+4. Merge Sort
+```cs
 
-#### Quick Sort
+```
+5. Quick Sort
+```cs
+
+```
