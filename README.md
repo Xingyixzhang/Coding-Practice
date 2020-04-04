@@ -4,7 +4,7 @@ My Leetcode problem collection is to help learn **algorithms** and **data struct
 ## Algorithms
 
 ### Sorting Algorithms --
-1. Insertoin Sort
+1. Insertoin Sort (Move to Insert)  ================== O(n) - O(n^2) Time and O(1) Space. =================
 
 [![Video Explaination for Insertion Sort](http://img.youtube.com/vi/OGzPmgsI-pQ/0.jpg)](http://www.youtube.com/watch?v=OGzPmgsI-pQ)
 ```cs
@@ -22,12 +22,28 @@ void InsertionSort(int[] arr){
 }
 ```
 ***
-2. Selection Sort
-```cs
+2. Selection Sort (Find min and Swap) ================== O(n^2) Time and O(1) Space. =================
 
+[![Video Explaination for Selection Sort](http://img.youtube.com/vi/xWBP4lzkoyM/0.jpg)](http://www.youtube.com/watch?v=xWBP4lzkoyM)
+```cs
+void SelectionSort(int[] arr){
+  int n = arr.Length;
+  for (int i = 0; i < n; i++){
+    int min_index = i;
+    for (int j = i+1; j < n; j++){
+      if (arr[j] < arr[min_index])  min_index = j;
+    }
+    // Swap arr[min_index] and arr[i]:
+    int temp = arr[min_index];
+    arr[min_index] = arr[i];
+    arr[i] = temp;
+  }
+}
 ```
 ***
-3. Bubble Sort
+3. Bubble Sort (Compare and Swap)  ================== O(n) - O(n^2) Time and O(1) Space. =================
+
+[![Video Explaination for Selection Sort](http://img.youtube.com/vi/nmhjrI-aW5o/0.jpg)](http://www.youtube.com/watch?v=nmhjrI-aW5o)
 ```cs
 void BubbleSort(int[] arr){
   int n = arr.Length;
