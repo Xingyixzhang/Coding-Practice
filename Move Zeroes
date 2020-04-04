@@ -1,13 +1,29 @@
+==============================================================
+Operational Sub-Optimal; Space Optimal
+==============================================================
 public class Solution {
     public void MoveZeroes(int[] nums) {
         int count = 0;
-        int[] arr = new int[nums.Length];
         for (int i = 0; i < nums.Length; i++){
             if (nums[i] != 0) nums[i-count] = nums[i];
             else    count++;
         }
         for (int i = count; i > 0; i--){
             nums[nums.Length-i] = 0;
+        }
+    }
+}
+==============================================================
+Optimal
+==============================================================
+public class Solution {
+    public void MoveZeroes(int[] nums) {
+        for (int lastNonZeroIndex = 0, curr = 0; curr < nums.Length; curr++){
+            if (nums[curr] != 0){
+                int temp = nums[curr];
+                nums[curr] = nums[lastNonZeroIndex];
+                nums[lastNonZeroIndex++] = temp;
+            }
         }
     }
 }
