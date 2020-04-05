@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    private void Helper(TreeNode node, Dictionary<int, TreeNode> pairs, List<int> inorder){
+        if (node == null)   return;
+        pairs.Add(node.val, node);
+        Helper(node.left, pairs, inorder);
+        inorder.Add(node.val);
+        Helper(node.right, pairs, inorder);
+    }
+    public void RecoverTree(TreeNode root) {
+        if (root == null)   return;
+        var pairs = new Dictionary<int, TreeNode>();
+        var inorder = new List<int>();
+        Helper(root, pairs, inorder);
+        
+        int min = -1, max = -1;
+        for (int i = inorder.Count - 2; i >= 0; i--){
+            if (inorder[i] > inorder[i+1])  { min = inorder[i+1]; break; }
+        }
+        for (int i = 0; i < inorder.Count - 1; i++){
+            if (inorder[i] > inorder[i+1])  { max = inorder[i]; break; }
+        }
+        
+        int maxVal = pairs[max].val;
+        int minVal = pairs[min].val;
+        
+        pairs[max].val = minVal;
+        pairs[min].val = maxVal;
+    }
+}
