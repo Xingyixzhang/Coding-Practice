@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    int maxSum = 0;
+    public int MaxSumBST(TreeNode root) {
+        Helper(root);
+        return maxSum;
+    }
+    private (bool isBST, int sum, TreeNode min, TreeNode max) Helper(TreeNode node){
+        if (node == null)   return (true, 0, null, null);
+        var left = Helper(node.left);
+        var right = Helper(node.right);
+        bool isValid = false;
+        int sum = node.val + left.sum + right.sum;
+        if (left.isBST && right.isBST && 
+            (left.max == null || node.val > left.max.val) &&
+            (right.min == null || right.min.val > node.val)){
+            isValid = true;
+            maxSum = Math.Max(sum, maxSum);
+        }
+        return (isValid, sum, left.min??node, right.max??node);
+    }
+}
