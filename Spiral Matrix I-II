@@ -11,7 +11,7 @@ Input:
 Output: [1,2,3,6,9,8,7,4,5]
 */
 
-// Solution 1. Simulation --
+// Simulation --
 
 public class Solution {
     public IList<int> SpiralOrder(int[][] matrix) {
@@ -37,5 +37,36 @@ public class Solution {
     }
 }
 
-// Solution 2. Layer by Layer --
+// II ---------------------------------------------------------------------------------------
+Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
 
+Example:
+
+Input: 3
+Output:
+[
+ [ 1, 2, 3 ],
+ [ 8, 9, 4 ],
+ [ 7, 6, 5 ]
+]
+
+public class Solution {
+    public int[][] GenerateMatrix(int n) {
+        int num = 1;
+        int[][] res = new int[n][];
+        int rowstart = 0, rowend = n-1, colstart = 0, colend = n-1;
+        for (int i=0; i<n; i++)     res[i] = new int[n];
+        
+        while (rowstart <= rowend && colstart <= colend){
+            for (int i = colstart; i <= colend; i++)        res[rowstart][i] = num++;
+            for (int i = rowstart+1; i <= rowend; i++)      res[i][colend] = num++;
+            if (rowstart != rowend)
+                for (int i = colend-1; i >=colstart; i--)   res[rowend][i] = num++;
+            if (colstart != colend)
+                for (int i = rowend-1; i > rowstart; i--)   res[i][colstart] = num++;
+            rowstart++;     colstart++;
+            rowend--;       colend--;
+        }
+        return res;
+    }
+}
