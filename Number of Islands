@@ -1,0 +1,49 @@
+Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+Example 1:
+
+Input:
+11110
+11010
+11000
+00000
+
+Output: 1
+Example 2:
+
+Input:
+11000
+11000
+00100
+00011
+
+Output: 3
+
+public class Solution {
+    int rows = 0, cols = 0;
+    char[][] grid;
+    public int NumIslands(char[][] grid) {
+        int islandCount = 0;
+        this.grid = grid;
+        this.rows = this.grid.Length;
+        if (this.rows == 0) return 0;
+        this.cols = this.grid[0].Length;
+        for (int row = 0; row < this.rows; row++){
+            for (int col = 0; col < this.cols; col++){
+                if (this.grid[row][col] == '1'){
+                    islandCount++;
+                    DFS(row, col);
+                }
+            }
+        }
+        return islandCount;
+    }
+    private void DFS(int row, int col){
+        if (row<0 || col<0 || row==this.rows || col==this.cols || this.grid[row][col]=='0' || this.grid[row][col]=='V')    return;
+        this.grid[row][col] = 'V';
+        DFS(row + 1, col);
+        DFS(row - 1, col);
+        DFS(row, col + 1);
+        DFS(row, col - 1);
+    }
+}
