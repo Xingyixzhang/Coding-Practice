@@ -37,6 +37,61 @@ public class Solution {
     }
 }
 
+OR ====================================================================
+
+/*
+ * Algorithm: 
+ * 1. Use direction array to encapsulate four direction using two arrays. Go right, go down, go left and go up are four direction to form one spiral;
+ * 2. Set start point as outside the matrix first row left to the first element in the matrix;
+ * 3. Design a while loop to make sure all elements in matrix will be iterated;
+ * 4. Design a conditional statement to determine if the change of direction is needed.
+ * 5. Change of direction can be expressed in (direction + 1) % 4;
+ * 6. Add the element to the list, mark visit
+ * 7. Prepare for next iteration, set startRow, startCol two variables.
+*/
+
+public class Solution {
+    public IList<int> SpiralOrder(int[][] matrix) {
+        if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0)   
+            return new List<int>();
+        int rows = matrix.Length, columns = matrix[0].Length;
+        
+        // right, down, left, up
+        var directionX = new int[]{0, 1, 0, -1};
+        var directionY = new int[]{1, 0, -1, 0};
+        
+        var visited = new bool[rows, columns];
+        
+        var direction = 0; 
+        var startRow = 0; 
+        var startCol = -1; 
+        
+        var list = new List<int>(); 
+        
+        int index = 0; 
+        while(index < rows * columns)
+        {
+            var nextRow = startRow + directionX[direction];
+            var nextCol = startCol + directionY[direction];
+            
+            if(nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= columns || visited[nextRow, nextCol])
+            {
+                direction = (direction + 1) % 4; 
+                continue; 
+            }
+            
+            list.Add(matrix[nextRow][nextCol]);
+            visited[nextRow, nextCol] = true; 
+            
+            startRow = nextRow;
+            startCol = nextCol;
+            
+            index++; 
+        }
+        
+        return list; 
+    }
+}
 // II ---------------------------------------------------------------------------------------
 Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
 
