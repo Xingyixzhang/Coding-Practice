@@ -1,0 +1,31 @@
+Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+
+Example:
+Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+Input: word1 = “coding”, word2 = “practice”
+Output: 3
+Input: word1 = "makes", word2 = "coding"
+Output: 1
+Note:
+You may assume that word1 does not equal to word2, and they are both in the list.
+
+public class Solution {
+    public int ShortestDistance(string[] words, string word1, string word2) {
+        int i1 = -1, i2 = -1;
+        int minDistance = words.Length;
+        for (int i = 0; i < words.Length; i++) {
+            if (words[i] == word1) {
+                i1 = i;
+            } 
+            else if (words[i] == word2) {
+                i2 = i;
+            }
+
+            if (i1 != -1 && i2 != -1) {
+                minDistance = Math.Min(minDistance, Math.Abs(i1 - i2));
+            }
+        }
+        return minDistance;
+    }
+}
