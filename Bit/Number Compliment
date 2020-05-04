@@ -1,0 +1,19 @@
+Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.
+
+===================== Approach 1 =================================
+
+public class Solution {
+    public int FindComplement(int num) {
+        int mask = 1;
+        while (mask < num)  mask = (mask << 1) | 1;
+        return ~num & mask;
+    }
+}
+
+===================== Approach 2 =================================
+
+public class Solution {
+    public int FindComplement(int num) {
+        return Convert.ToInt32(string.Join("", Convert.ToString(num, 2).Select(b => b == '0' ? '1' : '0')), 2);
+    }
+}
